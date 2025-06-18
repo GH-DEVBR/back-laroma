@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Produto {
 
     @Id
@@ -13,12 +15,10 @@ public class Produto {
     private Long id;
 
     private String nome;
-    private String marca;
     private String descricao;
     private String imagemUrl;
-
-    private Double precoAtual;
-    private Double precoOriginal;
-    private Boolean destaque; // se aparece na home
+    private Double preco;
+    private String genero; // "Masculino", "Feminino", "Unissex"
 }
+
 

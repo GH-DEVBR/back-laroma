@@ -5,30 +5,30 @@ import com.laroma.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
 
-    private final ProdutoRepository repo;
+    private final ProdutoRepository repository;
 
-    public ProdutoService(ProdutoRepository repo) {
-        this.repo = repo;
+    public ProdutoService(ProdutoRepository repository) {
+        this.repository = repository;
     }
 
     public List<Produto> listarTodos() {
-        return repo.findAll();
+        return repository.findAll();
     }
 
-    public List<Produto> buscarPorMarca(String marca) {
-        return repo.findByMarcaContainingIgnoreCase(marca);
+    public Optional<Produto> buscarPorId(Long id) {
+        return repository.findById(id);
     }
 
     public Produto salvar(Produto produto) {
-        return repo.save(produto);
+        return repository.save(produto);
     }
 
-    public Produto buscarPorId(Long id) {
-        return repo.findById(id).orElse(null);
+    public List<Produto> buscarPorGenero(String genero) {
+        return repository.findByGenero(genero);
     }
 }
-

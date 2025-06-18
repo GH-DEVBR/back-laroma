@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produtos")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class ProdutoController {
 
     private final ProdutoService service;
@@ -22,18 +22,18 @@ public class ProdutoController {
         return service.listarTodos();
     }
 
-    @GetMapping("/marca")
-    public List<Produto> porMarca(@RequestParam String nome) {
-        return service.buscarPorMarca(nome);
-    }
-
     @GetMapping("/{id}")
-    public Produto porId(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public Produto buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id).orElse(null);
     }
 
     @PostMapping
-    public Produto cadastrar(@RequestBody Produto produto) {
+    public Produto salvar(@RequestBody Produto produto) {
         return service.salvar(produto);
+    }
+
+    @GetMapping("/genero/{genero}")
+    public List<Produto> buscarPorGenero(@PathVariable String genero) {
+        return service.buscarPorGenero(genero);
     }
 }
